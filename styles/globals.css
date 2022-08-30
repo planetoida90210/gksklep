@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .headerLink {
+    @apply cursor-pointer opacity-75 transition hover:opacity-100 text-xl;
+  }
+
+  .headerIcon {
+    @apply h-6 w-6 cursor-pointer opacity-75 transition hover:opacity-100;
+  }
+}
+
 .nav-h {
   height: calc(100vh - 66px);
 }
