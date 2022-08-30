@@ -12,13 +12,14 @@ import {
 import images from '../assets/app'
 
 const Header = () => {
+  const session = false;
   const { theme, setTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-30 flex w-full items-center justify-between p-4 dark:bg-[#0f0f12] bg-[#979797]">
+    <header className="sticky top-0 z-30 flex w-full items-center justify-between p-4 dark:bg-[#0f0f12] bg-[#E7ECEE]">
       <div className="flex items-center justify-center md:w-1/5">
         <Link href="/">
-        <div className="relative h-[90px] w-[90px] cursor-pointer opacity-75 transition hover:opacity-100">
+        <div className="relative h-[90px] w-[90px] cursor-pointer opacity-80 transition hover:opacity-100">
           <Image src={images.logo} className={theme === 'light' ? 'filter invert' : ''} layout="fill" objectFit="contain" alt="logo"/>
         </div>
       </Link>
@@ -33,14 +34,25 @@ const Header = () => {
         <SearchIcon className="headerIcon"/>
         <Link href="/checkout">
           <div className="relative cursor-pointer">
-            <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500">
+            <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full text-gray-300 dark:text-white bg-gradient-to-r from-pink-500 to-violet-500">
               5
             </span>
             <ShoppingBagIcon className="headerIcon" />
           </div>
         </Link>
-        <div className="flex flex-initial flex-row justify-end">
-        <div className="flex items-center ml-2">
+        {session ? (
+          <Image
+          src={"https://secure.gravatar.com/avatar/da9901a0359425519b21f3e2e11a13dd?s=500&d=mm&r=g"}
+          alt=""
+          className="cursor-pointer rounded-full"
+          width={34}
+          height={34}
+          onClick={()=>{}}
+           />
+        ):(
+          <UserIcon className="headerIcon" onClick={()=>{}}/>
+        ) }
+        <div className="flex items-center ml-3">
           <input
             type="checkbox"
             className="checkbox"
@@ -53,11 +65,7 @@ const Header = () => {
             <div className="w-3 h-3 absolute bg-white rounded-full ball" />
           </label>
         </div>
-      </div>
-      </div>
-      
-      
-      
+      </div>    
     </header>
   )
 }
