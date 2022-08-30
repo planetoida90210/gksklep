@@ -27,14 +27,14 @@ const Header = () => {
       <div className="hidden flex-1 items-center justify-center space-x-8 md:flex">
         <a className="headerLink">Produkty</a>
         <a className="headerLink">Nowości</a>
-        <a className="headerLink">Odkrywaj</a>
-        <a className="headerLink">Info</a>
+        <a className="headerLink">Wkrótce</a>
+        <a className="headerLink">Free Graffiti</a>
       </div>
       <div className="flex items-center justify-center gap-x-4 md:w-1/5">
         <SearchIcon className="headerIcon"/>
         <Link href="/checkout">
           <div className="relative cursor-pointer">
-            <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full text-gray-300 dark:text-white bg-gradient-to-r from-pink-500 to-violet-500">
+            <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full text-[11px] text-gray-300 dark:text-white bg-gradient-to-r from-pink-500 to-violet-500">
               5
             </span>
             <ShoppingBagIcon className="headerIcon" />
