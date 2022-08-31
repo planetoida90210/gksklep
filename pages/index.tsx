@@ -1,11 +1,14 @@
-import type { NextPage, GetServerSideProps } from 'next'
+import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Header, HomePage } from '../components'
 import { Tab } from '@headlessui/react';
-import { getEnabledCategories } from 'trace_events';
+import { fetchCategories } from '../utils/fetchCategories';
 
-const Home: NextPage = () => {
+interface Props {
+  categories: Category[]
+}
+
+const Home = ({ categories }: Props) => {
   return (
     <div>
       <Head>
@@ -23,7 +26,7 @@ const Home: NextPage = () => {
           </h1>
           <Tab.Group>
             <Tab.List className="flex justify-center">
-              {/* {getEnabledCategories.map((category)=>(
+              {categories.map((category)=> (
                 <Tab
                 key={category._id}
                 id={category._id}
@@ -37,7 +40,7 @@ const Home: NextPage = () => {
                 >
                   {category.title}
                 </Tab>
-              ))} */}
+              ))}
             </Tab.List>
             <Tab.Panels className="mx-auto max-w-fit pt-10 pb-24 sm:px-4">
               {/* <Tab.Panel className="tabPanel">{showProducts(0)}</Tab.Panel>
@@ -55,10 +58,12 @@ const Home: NextPage = () => {
 export default Home
 
 // Backend code
-export const getServerSideProps: GetServerSideProps = async () => {
-  // const categories = await fetchCategories()
-  
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+  const categories = await fetchCategories()
+
   return {
-    props: {},
+    props: {
+      categories,
+    },
   };
 };
