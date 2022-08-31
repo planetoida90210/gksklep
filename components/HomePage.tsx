@@ -14,8 +14,8 @@ const HomePage = () => {
           <span className="block">Graffitishop</span>
           <span className="block">Fineart Store</span>
         </h1>
-        <div>
-          {/* <Button title="Sprawdź"/> */}
+        <div className="space-x-8">
+          <Button title="Sprawdź"/>
           <a className="link">Przejdź do sklepu</a>
         </div>
       </div>
