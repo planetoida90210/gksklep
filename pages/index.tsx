@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Header, HomePage } from '../components'
@@ -49,7 +49,16 @@ const Home: NextPage = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
 export default Home
+
+// Backend code
+export const getServerSideProps: GetServerSideProps = async () => {
+  // const categories = await fetchCategories()
+  
+  return {
+    props: {},
+  };
+};
