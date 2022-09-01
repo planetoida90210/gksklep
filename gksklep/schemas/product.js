@@ -8,7 +8,7 @@ export default {
   fields: [
     {
       name: "title",
-      title: "Title",
+      title: "Tytuł",
       type: "string",
     },
     {
@@ -22,7 +22,7 @@ export default {
     },
     {
       name: "image",
-      title: "Image",
+      title: "Zdjęcie",
       type: "array",
       of: [{ type: "image" }],
       options: {
@@ -31,18 +31,18 @@ export default {
     },
     {
       name: "category",
-      title: "Category",
+      title: "Kategoria",
       type: "reference",
       to: [{ type: "category" }],
     },
     {
       name: "price",
-      title: "Price",
+      title: "Cena",
       type: "number",
     },
     {
       name: "description",
-      title: "Description",
+      title: "Opis",
       type: "blockContent",
     },
   ],

@@ -1,5 +1,5 @@
 interface Category {
-  _id: String;
+  _id: string;
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
