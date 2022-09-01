@@ -3,12 +3,15 @@ import Head from 'next/head'
 import { Header, HomePage } from '../components'
 import { Tab } from '@headlessui/react';
 import { fetchCategories } from '../utils/fetchCategories';
+import { fetchProducts } from '../utils/fetchProducts';
 
 interface Props {
-  categories: Category[]
+  categories: Category[];
+  products: Product[];
 }
 
-const Home = ({ categories }: Props) => {
+const Home = ({ categories, products }: Props) => {
+  console.log(products);
   return (
     <div>
       <Head>
@@ -59,11 +62,13 @@ export default Home
 
 // Backend code
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const categories = await fetchCategories()
+  const categories = await fetchCategories();
+  const products = await fetchProducts(); 
 
   return {
     props: {
       categories,
+      products,
     },
   };
 };
