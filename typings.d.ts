@@ -11,6 +11,14 @@ interface Category {
   title: string;
 }
 
+interface Image {
+  _key: string;
+  _type: "image";
+  asset: {
+    url: string
+  }
+}
+
 interface Product {
   _id: string;
   _createdAt: string;
