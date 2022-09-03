@@ -69,7 +69,7 @@ export default Home
 // Backend code
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const categories = await fetchCategories();
-  const products = await fetchProducts(); 
+  const products = await fetchProducts();
 
   return {
     props: {
