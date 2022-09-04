@@ -2,6 +2,11 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
 import React from 'react'
 import { urlFor } from '../sanity';
+import  Currency from 'react-currency-formatter';
+import { removeFromBasket } from '../redux/basketSlice';
+import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+
 
 interface Props {
   items: Product[];
@@ -9,6 +14,16 @@ interface Props {
 }
 
 const CheckoutProduct = ({ items, id }: Props) => {
+  const dispatch = useDispatch();
+
+  const removeItemFromBasket = () => {
+    dispatch(removeFromBasket({ id }));
+
+    toast.error(`${items[0].title} usunięto z koszyka.`, {
+      position: "bottom-center"
+    })
+  }
+
   return (
     <div>
       <div className="relative h-44 w-44">
@@ -34,8 +49,17 @@ const CheckoutProduct = ({ items, id }: Props) => {
         </div>
         <div>
           <h4>
-            
+            <Currency
+            quantity={items.reduce((total,item) => total + item.price, 0)}
+            currency="PLN" 
+            />
           </h4>
+          <button
+          onClick={removeItemFromBasket}
+          className="text-blue-500 hover:underline"
+          >
+            Usuń
+          </button>
         </div>
       </div>
     </div>
