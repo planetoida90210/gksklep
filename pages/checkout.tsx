@@ -51,7 +51,7 @@ const Checkout = () => {
         {items.length > 0 && (
           <div>
             {Object.entries(groupedItemsInBasket).map(([key, items]) => (
-              <CheckoutProduct />
+              <CheckoutProduct key={key} items={items} id={key}/>
             ))}
           </div>
         )}
