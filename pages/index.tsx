@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { Header, HomePage, Product } from '../components'
+import { Header, HomePage, Product, Basket } from '../components'
 import { Tab } from '@headlessui/react';
 import { fetchCategories } from '../utils/fetchCategories';
 import { fetchProducts } from '../utils/fetchProducts';
@@ -25,6 +25,9 @@ const Home = ({ categories, products }: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+
+      <Basket />
+
       <main className="relative h-[200vh] dark:bg-[#0f0f12] bg-[#E7ECEE]">
         <HomePage />
       </main>
