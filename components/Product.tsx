@@ -1,14 +1,25 @@
-import { ShoppingCartIcon } from '@heroicons/react/outline'
-import Image from 'next/image'
-import React from 'react'
-import { urlFor } from '../sanity'
+import { ShoppingCartIcon } from '@heroicons/react/outline';
+import Image from 'next/image';
+import React from 'react';
+import { urlFor } from '../sanity';
+import { useDispatch } from 'react-redux';
+import { addToBasket } from '../redux/basketSlice';
+import toast from "react-hot-toast";
 
 interface Props {
   product: Product
 }
 
 const Product = ({product}: Props) => {
-  const addItemToBasket = () => {};
+  const dispatch = useDispatch()
+
+  const addItemToBasket = () => {
+    dispatch(addToBasket(product));
+
+    toast.success(`${product.title} dodano do koszyka`, {
+      position: "bottom-center",
+    })
+  };
 
   return (
     <div className="flex h-fit w-[320px] select-none flex-col space-y-3 rounded-xl bg-[#35383C] p-8 md:h-[500px] md:w-[400px] md:p-10">
