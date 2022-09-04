@@ -37,9 +37,11 @@ const Header = () => {
         <SearchIcon className="headerIcon"/>
         <Link href="/checkout">
           <div className="relative cursor-pointer">
-            <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full text-[11px] text-gray-300 dark:text-white bg-gradient-to-r from-blue-500 to-purple-600">
-              {items.length}
-            </span>
+            {items.length > 0 && (
+             <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full text-[11px] text-gray-300 dark:text-white bg-gradient-to-r from-blue-500 to-purple-600">
+               {items.length}
+             </span>
+            )}
             <ShoppingBagIcon className="headerIcon" />
           </div>
         </Link>
