@@ -25,7 +25,7 @@ const CheckoutProduct = ({ items, id }: Props) => {
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-x-4 border-b border-gray-600 pb-5 lg:flex-row lg:items-center">
       <div className="relative h-44 w-44">
         <Image 
         src={urlFor(items[0].image[0]).url()} 
@@ -47,8 +47,8 @@ const CheckoutProduct = ({ items, id }: Props) => {
             <ChevronDownIcon className="w-6 h-6"/>
           </p>
         </div>
-        <div>
-          <h4>
+        <div className="flex flex-col items-end space-y-4">
+          <h4 className="text-xl font-semibold lg:text-2xl">
             <Currency
             quantity={items.reduce((total,item) => total + item.price, 0)}
             currency="PLN" 

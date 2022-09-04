@@ -28,14 +28,14 @@ const Checkout = () => {
   },[items]);
 
   return (
-    <div>
+    <div className="min-h-screen overflow-hidden dark:bg-[#0f0f12] bg-[#E7ECEE]">
       <Head>
         <title>Galeria Koloru - Marszałkowska 140</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main>
-        <div>
+      <main className="mx-auto max-w-5xl pb-24">
+        <div className="px-5">
           <h1 className="my-4 text-3xl font-semibold lg:text-4xl">
             {items.length > 0 ? "Przejżyj swój koszyk" : "Twój koszyk jest pusty."}
           </h1>
@@ -49,7 +49,7 @@ const Checkout = () => {
         </div>
 
         {items.length > 0 && (
-          <div>
+          <div className="mx-5 md:mx-8">
             {Object.entries(groupedItemsInBasket).map(([key, items]) => (
               <CheckoutProduct key={key} items={items} id={key}/>
             ))}
