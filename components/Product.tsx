@@ -29,7 +29,7 @@ const Product = ({product}: Props) => {
       <div className="flex flex-1 items-center justify-between space-x-3">
         <div className="space-y-2 text-xl text-white md:text-2xl">
           <p>{product.title}</p>
-          <p>{product.price}</p>
+          <p>{product.price} PLN</p>
         </div>
         <div 
         className="flex h-16 w-16 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-violet-500 to-blue-500"
