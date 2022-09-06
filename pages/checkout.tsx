@@ -93,7 +93,7 @@ const Checkout = () => {
                   Przejdź do podsumowania zamówienia:
                 </h4>
                 <div className="flex flex-col gap-4 md:flex-row">
-                  <div className="order-2 flex flex-1 flex-col items-center roudend-xl bg-gk-dark p-8 py-12 text-center">
+                  <div className="order-2 flex flex-1 flex-col items-center rounded-xl bg-gk-dark p-8 py-12 text-center">
                     <h4 className="mb-4 flex flex-col text-xl font-semibold">
                       <span>Płać na raty</span>
                       <span>z Apple Card</span>
@@ -101,6 +101,25 @@ const Checkout = () => {
                        136zł/msc z 0% OPR
                       </span>
                     </h4>
+                    <Button title="Zapłać z Apple Card odłożone w czasie" />
+                    <p className="mt-2 max-w-[240px] text-[13px]">
+                    0 zł / do zapłaty dzisiaj, co obejmuje podatki obowiązujące w pełnej cenie, zaliczki, koszty wysyłki i podatki.
+                    </p>
+                  </div>
+                  <div className="flex flex-1 flex-col bg-gk-dark items-center space-y-8 rounded-xl p-8 py-12 md:order-2">
+                    <h4 className="mb-4 flex flex-col text-xl font-semibold">
+                      Zapłać w całości
+                      <span>
+                        <Currency quantity={basketTotal + 15} currency="PLN" />
+                      </span>
+                    </h4>
+                    <Button
+                    noIcon
+                    // loading={loading}
+                    title="Zapłać za zamówienie"
+                    width="w-full"
+                    // onClick={createCheckoutSession} 
+                    />
                   </div>
                 </div>
               </div>
