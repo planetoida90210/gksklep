@@ -5,10 +5,10 @@ import { selectBasketItems, selectBasketTotal } from '../redux/basketSlice'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router';
 import Currency from 'react-currency-formatter';
-// import Stripe from 'stripe';
 import { Header, Button, CheckoutProduct } from '../components';
-// import { fetchPostJSON } from '../utils/api-helpers';
-// import getStripe from '../utils/get-stripejs';
+import { Stripe } from 'stripe'
+import { fetchPostJSON } from '../utils/api-helpers';
+import getStripe from '../utils/get-stripejs';
 
 
 const Checkout = () => {
@@ -19,6 +19,7 @@ const Checkout = () => {
 
   const [groupedItemsInBasket, setGroupedItemsInBasket] = useState(
     {} as { [key: string]: Product[] });
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
@@ -31,6 +32,29 @@ const Checkout = () => {
     setGroupedItemsInBasket(groupedItems);
   },[items]);
 
+  const createCheckoutSession = async () => {
+    setLoading(true);
+
+    const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON("/api/checkout_session", {
+      items: items
+    });
+
+    // internal server error
+    if((checkoutSession as any).statusCode === 500) {
+      console.error((checkoutSession as any).message);
+      return;
+    }
+
+    // redirect to checkout
+    const stripe = await getStripe()
+    const { error } = await stripe!.redirectToCheckout({
+      sessionId: checkoutSession.id,
+    });
+
+    console.warn(error.message);
+
+    setLoading(false);
+  }
 
   return (
     <div className="min-h-screen overflow-hidden dark:bg-[#0f0f12] bg-[#E7ECEE]">
@@ -54,7 +78,7 @@ const Checkout = () => {
         </div>
 
         {items.length > 0 && (
-          <div>
+          <div className="mx-5 md:mx-8">
             {Object.entries(groupedItemsInBasket).map(([key, items]) => (
               <CheckoutProduct key={key} items={items} id={key}/>
             ))}
@@ -106,7 +130,7 @@ const Checkout = () => {
                     0 zł / do zapłaty dzisiaj, co obejmuje podatki obowiązujące w pełnej cenie, zaliczki, koszty wysyłki i podatki.
                     </p>
                   </div>
-                  <div className="flex flex-1 flex-col bg-gk-dark items-center space-y-8 rounded-xl p-8 py-12 md:order-2">
+                  <div className="flex flex-1 flex-col text-center bg-gk-dark items-center space-y-8 rounded-xl p-8 py-12 md:order-2">
                     <h4 className="mb-4 flex flex-col text-xl font-semibold">
                       Zapłać w całości
                       <span>
@@ -118,7 +142,7 @@ const Checkout = () => {
                     // loading={loading}
                     title="Zapłać za zamówienie"
                     width="w-full"
-                    // onClick={createCheckoutSession} 
+                    onClick={createCheckoutSession} 
                     />
                   </div>
                 </div>
