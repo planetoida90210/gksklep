@@ -35,7 +35,7 @@ const Checkout = () => {
   const createCheckoutSession = async () => {
     setLoading(true);
 
-    const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON("/api/checkout_session", {
+    const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON("/api/checkout_sessions", {
       items: items
     });
 
@@ -93,7 +93,7 @@ const Checkout = () => {
                  </div>
                  <div className="flex justify-between">
                   <p>Wysyłka</p>
-                  <p>15 zł</p>
+                  <p>FREE</p>
                  </div>
                  <div className="flex justify-between">
                   <div className="flex flex-col gap-x-1 lg:flex-row">
@@ -108,7 +108,7 @@ const Checkout = () => {
                 <div className="flex justify-between pt-4 text-xl font-semibold">
                   <h4>Suma</h4>
                   <h4>
-                    <Currency quantity={basketTotal + 15} currency="PLN" />
+                    <Currency quantity={basketTotal} currency="PLN" />
                   </h4>
                 </div>
               </div>
@@ -134,12 +134,12 @@ const Checkout = () => {
                     <h4 className="mb-4 flex flex-col text-xl font-semibold">
                       Zapłać w całości
                       <span>
-                        <Currency quantity={basketTotal + 15} currency="PLN" />
+                        <Currency quantity={basketTotal} currency="PLN" />
                       </span>
                     </h4>
                     <Button
                     noIcon
-                    // loading={loading}
+                    loading={loading}
                     title="Zapłać za zamówienie"
                     width="w-full"
                     onClick={createCheckoutSession} 
