@@ -30,7 +30,7 @@ export default async function handler(
     try {
       // Create Checkout Sessions from body params
       const params: Stripe.Checkout.SessionCreateParams = {
-        payment_method_types: ["card", "blik"],
+        payment_method_types: ["blik", "p24"],
         // shipping_address_collection: {
         //   allowed_countries: ["US", "CA", "GB"],
         // },
