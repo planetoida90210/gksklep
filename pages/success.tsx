@@ -56,6 +56,26 @@ const success = () => {
               </h4>
             </div>
           </div>
+          <div className="mx-4 divide-y dark:divide-gray-500 divide-gray-300 rounded-md border dark:border-gray-500 border-gray-300 p-4 lg:ml-14">
+            <div className="space-y-2 pb-3">
+              <p>Twoje zamówienie zostało potwierdzone.</p>
+              <p className="text-sm dark:text-gray-300 text-gray-600">Twoje zamówienie zostało zaakceptowane, własnie je przygotowywujemy. Daj nam chwilkę - usiądź
+                wygodnie i poczekaj na złożenie zamówienia przez sprzedawcę.
+              </p>
+            </div>
+            <div className="pt-3 text-sm">
+              <p className="font-medium dark:text-gray-300 text-gray-600">
+                Zamówienie nr:
+              </p>
+              <p>GK#{session_id?.slice(-5)}</p>
+            </div>
+          </div>
+          <div className="my-4 mx-4 space-y-2 rounded-md border dark:border-gray-500 border-gray-600 p-4 lg:ml-14">
+            <p>Status zamówienia</p>
+            <p className="text-sm dark:text-gray-300 text-gray-600">
+              Potwierdzenie otrzymania zamówienia dostaniesz na maila lub SMS.
+            </p>
+          </div>
         </section>
       </main>
     </div>
