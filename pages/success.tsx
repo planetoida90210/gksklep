@@ -57,8 +57,8 @@ const Success = ({products}: Props) => {
           </div>
         </Link>
       </header>
-      <main className="">
-        <section className="order-2 mx-auto max-w-xl pb-12 lg:mx-0 lg:max-w-none lg:pr-16 lg:pt-16 xl:pl-16 2xl:pl-44">
+      <main className="grid grid-cols-1 lg:grid-cols-9">
+        <section className="order-2 mx-auto max-w-xl pb-12 lg:mx-0 lg:max-w-none lg:col-span-5 lg:pr-16 lg:pt-16 xl:pl-16 2xl:pl-44">
           <Link href="/">
             <div className="relative ml-14 hidden h-24 w-24 cursor-pointer transition lg:inline-flex">
               <Image
@@ -101,7 +101,7 @@ const Success = ({products}: Props) => {
               Potwierdzenie otrzymania zamówienia dostaniesz na maila lub SMS.
             </p>
           </div>
-          <div>
+          <div className="mx-4 flex flex-col items-center justify-between text-sm lg:ml-14 lg:flex-row">
             <p className="hidden lg:inline">Potrzebujesz pomocy? Skontaktuj się z nami.</p>
             {mounted && (
             <Button
@@ -114,7 +114,7 @@ const Success = ({products}: Props) => {
           </div>
         </section>
         {mounted && (
-          <section className="">
+          <section className="overflow-y-auto border-y border-l dark:border-gray-500 border-gray-300 bg-[#35383C] lg:order-2 lg:col-span-4 lg:h-screen lg:border-y-0">
             <div className={`w-full ${showOrderSummaryCondition && "border-b"} dark:border-gray-500 border-gray-300 text-sm lg:hidden`}>
               <div className="mx-auto flex max-x-xl items-center justify-between px-4 py-6">
                 <button
@@ -137,7 +137,7 @@ const Success = ({products}: Props) => {
             </div>
             {showOrderSummaryCondition && (
               <div className="mx-auto max-w-xl divide-y dark:border-gray-500 border-gray-300 px-4 py-4 lg:mx-0 lg:max-w-lg lg:px-10 lg:py-16">
-                <div>
+                <div className="space-y-4 pb-4">
                   {products.map((product) => (
                     <div key={product.id} className="flex items-center space-x-4 text-sm font-medium">
                       <div className="relative flex h-16 w-16 items-center justify-center rounded-md border-2 dark:border-[#232425] border-gray-500 dark:bg-[#525655] text-xs dark:text-white text-gray-200">
@@ -169,7 +169,7 @@ const Success = ({products}: Props) => {
                   </div>
                   <div className="flex justify-between text-sm">
                     <p className="text-gray-300">Wysyłka</p>
-                    <p className="font-medium">FREE</p>
+                    <p className="font-medium">-</p>
                   </div>
                 </div>
                 <div className="flex justify-between pt-4">
