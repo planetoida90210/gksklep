@@ -24,7 +24,7 @@ const Success = ({products}: Props) => {
   const {session_id} = router.query;
   const [mounted, setMounted] = useState(false);
   const [showOrderSummary, setShowOrderSummary] = useState(false);
-  // const subtotal = products.reduce((acc, product) => acc + product.price.unit_amount / 100, 0);
+  const subtotal = products.reduce((acc, product) => acc + product.price.unit_amount / 100, 0);
 
   useEffect(() => {
     setMounted(true);
@@ -131,14 +131,22 @@ const Success = ({products}: Props) => {
                 }
                 </button>
                 <p className="text-xl font-medium dark:text-white text-black">
-                  {/* <Currency quantity={subtotal} /> */}
+                  <Currency quantity={subtotal} currency="PLN" />
                 </p>
               </div>
             </div>
             {showOrderSummaryCondition && (
               <div>
                 <div>
-
+                  {products.map((product) => (
+                    <div key={product.id} className="flex items-center space-x-4 text-sm font-medium">
+                      <div className="relative flex h-16 w-16 items-center justify-center rounded-md border-2 dark:border-[#232425] border-gray-500 dark:bg-[#3d4042] text-xs dark:text-white text-gray-200">
+                        <div className="relative h-11 w-11 animate-bounce rounded-md">
+                          <Image src={images.logo} layout="fill" objectFit="contain"/>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
