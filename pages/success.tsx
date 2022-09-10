@@ -11,8 +11,14 @@ import { CheckIcon } from '@heroicons/react/solid';
 import { Button } from '../components';
 import { useMediaQuery } from 'react-responsive';
 import { ChevronDownIcon, ChevronUpIcon, ShoppingCartIcon } from '@heroicons/react/outline';
+import { GetServerSideProps } from 'next';
+import { fetchLineItems } from '../utils/fetchLineItems';
 
-const success = () => {
+interface Props {
+  products: StripeProduct[]
+}
+
+const Success = ({products}: Props) => {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
   const {session_id} = router.query;
@@ -132,7 +138,7 @@ const success = () => {
             {showOrderSummaryCondition && (
               <div>
                 <div>
-                  
+
                 </div>
               </div>
             )}
@@ -143,4 +149,15 @@ const success = () => {
   )
 }
 
-export default success
+export default Success;
+
+export const getServerSideProps: GetServerSideProps<Props> = async ({query}) => {
+  const sessionId = query.session_id as string
+  const products = await fetchLineItems(sessionId)
+
+  return{
+    props: {
+      products,
+    },
+  };
+};
