@@ -1,17 +1,36 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router';
+import Currency from 'react-currency-formatter';
 
 import images from '../assets/app'
 import { CheckIcon } from '@heroicons/react/solid';
+import { Button } from '../components';
+import { useMediaQuery } from 'react-responsive';
+import { ChevronDownIcon, ChevronUpIcon, ShoppingCartIcon } from '@heroicons/react/outline';
 
 const success = () => {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
   const {session_id} = router.query;
+  const [mounted, setMounted] = useState(false);
+  const [showOrderSummary, setShowOrderSummary] = useState(false);
+  // const subtotal = products.reduce((acc, product) => acc + product.price.unit_amount / 100, 0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, [])
+
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1024px)" });
+
+  const showOrderSummaryCondition = isTabletOrMobile ? showOrderSummary : true;
+
+  const handleShowOrderSummary = () => {
+    setShowOrderSummary(prev => !prev)
+  }
 
   return (
     <div>
@@ -76,7 +95,49 @@ const success = () => {
               Potwierdzenie otrzymania zamówienia dostaniesz na maila lub SMS.
             </p>
           </div>
+          <div>
+            <p className="hidden lg:inline">Potrzebujesz pomocy? Skontaktuj się z nami.</p>
+            {mounted && (
+            <Button
+              title="Wróć do sklepu"
+              onClick={() => router.push("/")}
+              width={isTabletOrMobile ? "w-full" : undefined}
+              padding="py-4"
+            />
+            )}
+          </div>
         </section>
+        {mounted && (
+          <section className="">
+            <div className={`w-full ${showOrderSummaryCondition && "border-b"} dark:border-gray-500 border-gray-300 text-sm lg:hidden`}>
+              <div className="mx-auto flex max-x-xl items-center justify-between px-4 py-6">
+                <button
+                  onClick={handleShowOrderSummary}
+                  className="flex items-center space-x-2"
+                >
+                  <ShoppingCartIcon className="h-6 w-6"/>
+                  <p>Pokaż podsumowanie zamówienia</p>
+                  {showOrderSummaryCondition ? (
+                    <ChevronUpIcon className="h-4 w-4"/>
+                  ) : (
+                    <ChevronDownIcon className="h-4 w-4"/>
+                  )
+                }
+                </button>
+                <p className="text-xl font-medium dark:text-white text-black">
+                  {/* <Currency quantity={subtotal} /> */}
+                </p>
+              </div>
+            </div>
+            {showOrderSummaryCondition && (
+              <div>
+                <div>
+                  
+                </div>
+              </div>
+            )}
+          </section>
+        )}
       </main>
     </div>
   )
