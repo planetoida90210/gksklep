@@ -136,17 +136,49 @@ const Success = ({products}: Props) => {
               </div>
             </div>
             {showOrderSummaryCondition && (
-              <div>
+              <div className="mx-auto max-w-xl divide-y dark:border-gray-500 border-gray-300 px-4 py-4 lg:mx-0 lg:max-w-lg lg:px-10 lg:py-16">
                 <div>
                   {products.map((product) => (
                     <div key={product.id} className="flex items-center space-x-4 text-sm font-medium">
-                      <div className="relative flex h-16 w-16 items-center justify-center rounded-md border-2 dark:border-[#232425] border-gray-500 dark:bg-[#3d4042] text-xs dark:text-white text-gray-200">
+                      <div className="relative flex h-16 w-16 items-center justify-center rounded-md border-2 dark:border-[#232425] border-gray-500 dark:bg-[#525655] text-xs dark:text-white text-gray-200">
                         <div className="relative h-11 w-11 animate-bounce rounded-md">
                           <Image src={images.logo} layout="fill" objectFit="contain"/>
                         </div>
+                        <div className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[gray] text-xs">
+                          {product.quantity}
+                        </div>
                       </div>
+                      <p className="flex-1">{product.description}</p>
+                      <Currency
+                        quantity={product.price.unit_amount / 100}
+                        currency={product.currency} 
+                      />
                     </div>
                   ))}
+                </div>
+                <div className="space-y-1 py-4">
+                  <div className="flex justify-between text-sm">
+                    <p className="text-gray-300">Suma</p>
+                    <p>
+                      <Currency quantity={subtotal} currency="PLN"/>
+                    </p>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <p className="text-gray-300">Rabat</p>
+                    <p className="text-gray-300">-</p>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <p className="text-gray-300">Wysyłka</p>
+                    <p className="font-medium">FREE</p>
+                  </div>
+                </div>
+                <div className="flex justify-between pt-4">
+                  <p>Suma łączna</p>
+                  <p className="flex items-center gap-x-2 text-xs text-gray-300">
+                    <span className="text-xl font-medium text-white">
+                      <Currency quantity={subtotal} currency="PLN"/>
+                    </span>
+                  </p>
                 </div>
               </div>
             )}
